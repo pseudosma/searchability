@@ -1,0 +1,44 @@
+{
+  "name": "searchability",
+  "version": "1.0.0",
+  "description": "A simple type to pair a sting with built-in search functions",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "keywords": [
+    "string",
+    "search",
+    "searchable",
+    "searchability"
+  ],
+  "author": "David Paige",
+  "license": "MIT",
+  "files": [
+    "lib/**/*"
+  ],
+  "homepage": "https://github.com/pseudosma/searchability",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pseudosma/searchability.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pseudosma/searchability/issues"
+  },
+  "scripts": {
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest --config jestconfig.json",
+    "coverallsTest": "jest --config jestconfig.json && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.3.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.5"
+  }
+}
