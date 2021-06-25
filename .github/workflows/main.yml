@@ -1,4 +1,4 @@
-name: Build and Test
+name: Test
 
 on: [push]
 
@@ -17,8 +17,6 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
-      - run: npm run coverage
-        name: Build
-      - run: npm run build
+        name: Test
         env:
           CI: true
