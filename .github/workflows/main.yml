@@ -9,6 +9,7 @@ jobs:
       matrix:
         node-version: [14]
     steps:
+      - uses: actions/checkout@v2
       - name: Build on Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
