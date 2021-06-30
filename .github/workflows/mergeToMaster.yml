@@ -1,4 +1,4 @@
-name: Lint, Test, and Coveralls
+name: Lint and Test
 
 on:
   pull_request:
