@@ -1,4 +1,4 @@
-# Searchability [![Lint and Test](https://github.com/pseudosma/searchability/actions/workflows/mergeToMaster.yml/badge.svg?branch=master)](https://github.com/pseudosma/searchability/actions/workflows/mergeToMaster.yml)searchability) ![Coverage](https://img.shields.io/coveralls/github/pseudosma/searchability) ![License](https://img.shields.io/npm/l/searchability)
+# Searchability [![Lint and Test](https://github.com/pseudosma/searchability/actions/workflows/mergeToMaster.yml/badge.svg?branch=master)](https://github.com/pseudosma/searchability/actions/workflows/mergeToMaster.yml) ![Coverage](https://img.shields.io/coveralls/github/pseudosma/searchability) ![License](https://img.shields.io/npm/l/searchability)
 
 Searchability provides a simple type, a **Searchable**, to pair a sting with some of the built-in search functions - `endsWith`, `includes`, or `startsWith`. 
 

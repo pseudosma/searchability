@@ -14,7 +14,7 @@ jobs:
       - name: Build and Create a PR
         uses: technote-space/create-pr-action@v2
         with:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXECUTE_COMMANDS: |
             VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             npm ci
@@ -28,6 +28,6 @@ jobs:
       - name: Delete branch
         uses: dawidd6/action-delete-branch@v3
         with:
-          github_token: ${{secrets.github_token}}
+          github_token: ${{secrets.GITHUB_TOKEN}}
           branches: release
           suffix: -done
