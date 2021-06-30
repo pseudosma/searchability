@@ -21,10 +21,6 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: make coverage
-finish:
-  needs: masterMerge
-  runs-on: ubuntu-latest
-  steps:
       - uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
