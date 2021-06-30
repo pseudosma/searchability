@@ -5,7 +5,7 @@ on: create
 jobs:
   publishJob:
     runs-on: ubuntu-latest
-    if: beginsWith('refs/heads/release-', github.ref)
+    if: startsWith('refs/heads/release-', github.ref)
     env:
       VERSION: 0
     steps:
