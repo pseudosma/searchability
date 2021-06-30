@@ -1,0 +1,23 @@
+name: Publish
+
+on: [create]
+
+jobs:
+  publishJob:
+    runs-on: ubuntu-latest
+    if: beginsWith('refs/heads/release-', github.ref)
+    env:
+      VERSION: 0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        run: VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+      - name: Create Tag
+        uses: negz/create-tag@v1
+        with:
+          token: ${{ secrets.github_token }}
+          version: VERSION
+      - name: Deploy to NPM
+        uses: JS-DevTools/npm-publish@v1
+          with:
+            token: ${{ secrets.npm_token }}
