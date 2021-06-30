@@ -1,6 +1,6 @@
 name: Publish
 
-on: [create]
+on: create
 
 jobs:
   publishJob:
@@ -11,12 +11,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        run: VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
       - name: Create Tag
         uses: negz/create-tag@v1
         with:
           token: ${{ secrets.github_token }}
-          version: VERSION
+          version: $(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
       - name: Deploy to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
