@@ -19,5 +19,5 @@ jobs:
           version: VERSION
       - name: Deploy to NPM
         uses: JS-DevTools/npm-publish@v1
-          with:
-            token: ${{ secrets.npm_token }}
+        with:
+          token: ${{ secrets.npm_token }}

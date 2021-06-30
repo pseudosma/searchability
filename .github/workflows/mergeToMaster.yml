@@ -26,5 +26,5 @@ finish:
   runs-on: ubuntu-latest
   steps:
       - uses: coverallsapp/github-action@master
-          with:
-            github-token: ${{ secrets.github_token }}
+        with:
+          github-token: ${{ secrets.github_token }}
