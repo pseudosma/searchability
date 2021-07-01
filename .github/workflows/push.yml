@@ -8,8 +8,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Lint and Test 
         uses: actions/setup-node@v1
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
+        run: |
+          npm ci
+          npm run lint
+          npm test
