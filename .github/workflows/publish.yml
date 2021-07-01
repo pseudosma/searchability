@@ -6,19 +6,19 @@ jobs:
   publishJob:
     runs-on: ubuntu-latest
     if: startsWith('refs/heads/release-', github.ref)
-    env:
-      VERSION: 0
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      env:
+        VERSION: 0
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
 
-      - name: Create Tag
-        uses: negz/create-tag@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          version: $(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
-          
-      - name: Deploy to NPM
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
+        - name: Create Tag
+          uses: negz/create-tag@v1
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            version: $(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            
+        - name: Deploy to NPM
+          uses: JS-DevTools/npm-publish@v1
+          with:
+            token: ${{ secrets.NPM_TOKEN }}
