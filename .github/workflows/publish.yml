@@ -2,12 +2,12 @@ name: Publish
 
 on: create
 
-if: startsWith(github.ref, 'refs/heads/release-')
 jobs:
   publishJob:
     runs-on: ubuntu-latest
     env:
       VERSION: 0
+    if: startsWith(github.ref, 'refs/heads/release-')
     steps:
       - name: Checkout
         uses: actions/checkout@v2

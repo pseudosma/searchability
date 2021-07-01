@@ -1,0 +1,23 @@
+name: Lint and Test
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [closed]
+
+jobs:
+  masterMerge:
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Lint and Coverage
+        uses: actions/setup-node@v1
+      - run: npm ci
+      - run: npm run lint
+      - name: Send to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
