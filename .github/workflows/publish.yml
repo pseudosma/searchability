@@ -2,7 +2,7 @@ name: Publish
 
 on: create
 
-if: startsWith('refs/heads/release-', github.ref)
+if: startsWith(github.ref, 'refs/heads/release-')
 jobs:
   publishJob:
     runs-on: ubuntu-latest

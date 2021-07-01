@@ -2,10 +2,10 @@ name: Release
 
 on: create
 
+if: github.ref == 'refs/heads/release'
 jobs:
   releaseJob:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/releases'
     env:
       VERSION: 0
     steps:
