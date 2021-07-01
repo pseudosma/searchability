@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v1
       - run: npm ci
       - run: npm run lint
-      - run: npm test
+      - run: make coverage
       - name: Send to Coveralls
         uses: coverallsapp/github-action@master
         with:
