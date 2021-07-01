@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1625110392966" clover="3.2.0">
-  <project timestamp="1625110392966" name="All files">
+<coverage generated="1625115136025" clover="3.2.0">
+  <project timestamp="1625115136025" name="All files">
     <metrics statements="19" coveredstatements="19" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4" elements="31" coveredelements="31" complexity="0" loc="19" ncloc="19" packages="1" files="2" classes="2"/>
     <file name="index.ts" path="/home/dm/creations/node/searchability/src/index.ts">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
