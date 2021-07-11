@@ -9,8 +9,11 @@ jobs:
       VERSION: 0
     if: github.ref == 'refs/heads/release'
     steps:
-      - name: 
+      - name: Checkout
         uses: actions/checkout@v2
+      - name: Node setup 
+        uses: actions/setup-node@v1
+      - name: Build New Release Branch
         run: |
             VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             git checkout -b release-${{ VERSION }}
