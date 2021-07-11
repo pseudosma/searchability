@@ -6,10 +6,10 @@ jobs:
   publishJob:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/heads/release-')
+    env:
+      VERSION: 0
     steps:
       - name: Checkout
-        env:
-          VERSION: 0
         uses: actions/checkout@v2
       - run: VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
       - name: Create Tag
