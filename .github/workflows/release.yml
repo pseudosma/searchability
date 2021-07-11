@@ -6,12 +6,12 @@ jobs:
   releaseJob:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/release'
+    env:
+      VERSION: 0
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - name: Build and Update CHANGELPG
-        env:
-          VERSION: 0
         run: |
             VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             npm ci
@@ -20,7 +20,7 @@ jobs:
       - name: Make New Tagged Release Branch and PR
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: release-$VERSION
+          branch: join(['release-', $VERSION])
           commit-message: 'Update CHANGELOG'
           base: 'master'
       - name: Delete branch
