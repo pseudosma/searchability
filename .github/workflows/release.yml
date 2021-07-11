@@ -22,6 +22,7 @@ jobs:
         with:
           branch: release-$VERSION
           commit-message: 'Update CHANGELOG'
+          base: 'master'
       - name: Delete branch
         uses: dawidd6/action-delete-branch@v3
         with:
