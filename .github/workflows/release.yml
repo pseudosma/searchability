@@ -22,7 +22,7 @@ jobs:
         env:
           BRANCH_NAME: format('release-{0}', $VERSION)
         with:
-          branch: ${{ BRANCH_NAME }}
+          branch: $BRANCH_NAME
           commit-message: 'Update CHANGELOG'
           base: 'master'
       - name: Delete branch
