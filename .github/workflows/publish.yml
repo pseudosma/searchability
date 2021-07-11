@@ -9,14 +9,17 @@ on:
 jobs:
   publishJob:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref,'refs/heads/release-') && github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       VERSION: 0
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: echo "::set-env name=VERSION::$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')"
+      - run: |
+            VER=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            echo "::set-env name=VERSION::$VER"
+            git checkout release-$VER
       - name: Create Tag
         uses: negz/create-tag@v1
         with:
