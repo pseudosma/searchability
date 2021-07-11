@@ -21,7 +21,7 @@ jobs:
       - name: Make New Tagged Release Branch and PR
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: ${{ format('releas-{0}', $VERSION) }}
+          branch: ${{ format('releas-{0}', VERSION) }}
           commit-message: 'Update CHANGELOG'
           base: 'master'
       - name: Delete branch
