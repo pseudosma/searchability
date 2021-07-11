@@ -8,11 +8,11 @@ jobs:
     if: startsWith(github.ref, 'refs/heads/release-')
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Create Tag
         env:
-          VERSION: $(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+          VERSION: 0
+        uses: actions/checkout@v2
+      - run: VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+      - name: Create Tag
         uses: negz/create-tag@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
