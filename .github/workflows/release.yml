@@ -9,12 +9,12 @@ jobs:
       VERSION: 0
     if: github.ref == 'refs/heads/release'
     steps:
-      - name: Build New Release Branch
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
+      - name: Build New Release Branch
         env:
           VERSION: $(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
-      - run: |
+        run: |
             git checkout -b release-$VERSION
             npm ci
             tsc
