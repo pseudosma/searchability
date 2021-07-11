@@ -15,9 +15,8 @@ jobs:
         uses: actions/setup-node@v1
       - name: Build New Release Branch
         env:
-          VERSION: ''
+          VERSION: $(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
         run: |
-            $VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             git checkout -b release-$VERSION
             npm ci
             tsc
