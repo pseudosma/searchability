@@ -9,24 +9,17 @@ jobs:
       VERSION: 0
     if: github.ref == 'refs/heads/release'
     steps:
-      - name: Checkout
+      - name: 
         uses: actions/checkout@v2
-
-      - name: Build and Create a PR
-        uses: technote-space/create-pr-action@v2
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EXECUTE_COMMANDS: |
-            VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
-            npm ci
-            tsc
-            sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md
-          COMMIT_MESSAGE: 'creating a release-X.X.X branch'
-          #COMMIT_NAME: 'GitHub Actions'
-          #COMMIT_EMAIL: 'example@example.com'
-          PR_BRANCH_NAME: format('{{release-{0}}}', VERSION')
-          PR_TITLE: 'clean up changelog'
-          
+        run: |
+            VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]') \
+            git checkout -b release-${{ VERSION }}
+            npm ci \
+            tsc \
+            sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md \
+            git add .
+            git commit -m"building release branch"
+            git push origin release-${{ VERSION }}
       - name: Delete branch
         uses: dawidd6/action-delete-branch@v3
         with:
