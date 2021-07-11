@@ -25,6 +25,7 @@ jobs:
         with:
           branch: ${{ format('release-{0}', env.VERSION) }}
           commit-message: 'Update CHANGELOG'
+          title: 'Update CHANGELOG'
           base: 'master'
       - name: Delete branch
         uses: dawidd6/action-delete-branch@v3
