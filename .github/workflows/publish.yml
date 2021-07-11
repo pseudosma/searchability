@@ -6,7 +6,7 @@ jobs:
   publishJob:
     runs-on: ubuntu-latest
     env:
-      VERSION: 0
+      VERSION: $(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
     if: startsWith(github.ref, 'refs/heads/release-')
     steps:
       - name: Checkout
@@ -16,7 +16,7 @@ jobs:
         uses: negz/create-tag@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          version: $(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+          version: $VERSION
           
       - name: Deploy to NPM
         uses: JS-DevTools/npm-publish@v1
