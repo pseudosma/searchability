@@ -11,18 +11,17 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
-      - name: Build and Update CHANGELPG
+      - name: Build and Update CHANGELOG
         run: |
             VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            echo "updating changelog for version $VERSION" 
             npm ci
             tsc
             sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md
       - name: Make New Tagged Release Branch and PR
         uses: peter-evans/create-pull-request@v3
-        env:
-          BRANCH_NAME: format('release-{0}', $VERSION)
         with:
-          branch: $BRANCH_NAME
+          branch: ${{ format('releas-{0}', $VERSION) }}
           commit-message: 'Update CHANGELOG'
           base: 'master'
       - name: Delete branch
