@@ -7,17 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/release'
     env:
-      VERSION: 0
+      VERSION: ${{ (cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]') }}
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - name: Build and Update CHANGELOG
         run: |
-            VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
-            echo "updating changelog for version $VERSION"
+            echo "updating changelog for version ${{env.VERSION}}"
             npm ci
             tsc
-            sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md
+            sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '${{env.VERSION}}'/g' CHANGELOG.md
       - name: Make New Tagged Release Branch and PR
         uses: peter-evans/create-pull-request@v3
         with:
