@@ -12,13 +12,13 @@ jobs:
       - name: 
         uses: actions/checkout@v2
         run: |
-            VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]') \
+            VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             git checkout -b release-${{ VERSION }}
-            npm ci \
-            tsc \
-            sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md \
-            git add . \
-            git commit -m"building release branch" \
+            npm ci
+            tsc
+            sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md
+            git add .
+            git commit -m"building release branch"
             git push origin release-${{ VERSION }}
       - name: Delete branch
         uses: dawidd6/action-delete-branch@v3
