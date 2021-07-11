@@ -23,7 +23,7 @@ jobs:
         env:
           BRANCH_NAME: 'test'
         with:
-          branch: ${{ format('release-', $BRANCH_NAME) }}
+          branch: ${{ format('release-{0}', BRANCH_NAME) }}
           commit-message: 'Update CHANGELOG'
           base: 'master'
       - name: Delete branch
