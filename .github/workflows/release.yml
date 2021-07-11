@@ -7,12 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/release'
     env:
-      VERSION: ${{ (cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]') }}
+      VERSION: 0
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - name: Build and Update CHANGELOG
         run: |
+            ${{env.VERSION}}=(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             echo "updating changelog for version ${{env.VERSION}}"
             npm ci
             tsc
