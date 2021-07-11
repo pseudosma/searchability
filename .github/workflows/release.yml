@@ -12,7 +12,7 @@ jobs:
       - name: Build and Update CHANGELPG
         env:
           VERSION: 0
-      - run: |
+        run: |
             VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             npm ci
             tsc
