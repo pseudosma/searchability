@@ -1,17 +1,22 @@
 name: Publish
 
-on: create
+on:
+  workflow_run:
+    workflows: ["Release"]
+    branches: startsWith(github.ref, 'refs/heads/release-')
+    types: 
+      - completed
 
 jobs:
   publishJob:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/release-')
     env:
       VERSION: 0
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+      - run: echo "::set-env name=VERSION::$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')"
       - name: Create Tag
         uses: negz/create-tag@v1
         with:
