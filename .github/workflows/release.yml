@@ -17,8 +17,8 @@ jobs:
             npm ci \
             tsc \
             sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md \
-            git add .
-            git commit -m"building release branch"
+            git add . \
+            git commit -m"building release branch" \
             git push origin release-${{ VERSION }}
       - name: Delete branch
         uses: dawidd6/action-delete-branch@v3
