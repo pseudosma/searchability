@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
       - name: Build and Update CHANGELOG
         run: |
-            ${{env.VERSION}}=(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            echo "::set-env name=VERSION::$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')"
             echo "updating changelog for version ${{env.VERSION}}"
             npm ci
             tsc
