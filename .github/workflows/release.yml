@@ -17,7 +17,7 @@ jobs:
         env:
           VERSION: ''
         run: |
-            $VERSION=$(cat package.json | grep version | head -l | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            $VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             git checkout -b release-$VERSION
             npm ci
             tsc
