@@ -23,7 +23,7 @@ jobs:
         env:
           BRANCH_NAME: 'test'
         with:
-          branch: ${BRANCH_NAME}
+          branch: ${{ BRANCH_NAME }}
           commit-message: 'Update CHANGELOG'
           base: 'master'
       - name: Delete branch
