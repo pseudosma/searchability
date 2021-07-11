@@ -12,16 +12,15 @@ jobs:
       - name: Build New Release Branch
         env:
           VERSION: 0
-        run: |
+      - run: |
             VERSION=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
-            git branch release-$VERSION
-            git checkout release-$VERSION
             npm ci
             tsc
             sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md
-            git add .
-            git commit -m"building release branch"
-            git push origin release-$VERSION
+      - uses: peter-evans/create-pull-request@v3
+      - with:
+          branch: release-$VERSION
+          commit-message: 'Update CHANGELOG'
       - name: Delete branch
         uses: dawidd6/action-delete-branch@v3
         with:
