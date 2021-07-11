@@ -14,11 +14,12 @@ jobs:
       - uses: actions/setup-node@v1
       - name: Build and Update CHANGELOG
         run: |
-            echo "::set-env name=VERSION::$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')"
+            VER=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            echo "::set-env name=VERSION::$VER"
             npm ci
             tsc
-            echo "updating changelog for version ${{env.VERSION}}"
-            sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '${{env.VERSION}}'/g' CHANGELOG.md
+            echo "updating changelog for version $VER"
+            sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VER'/g' CHANGELOG.md
       - name: Make New Tagged Release Branch and PR
         uses: peter-evans/create-pull-request@v3
         with:
