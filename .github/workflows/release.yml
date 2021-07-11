@@ -8,15 +8,16 @@ jobs:
     if: github.ref == 'refs/heads/release'
     env:
       VERSION: 0
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - name: Build and Update CHANGELOG
         run: |
             echo "::set-env name=VERSION::$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')"
-            echo "updating changelog for version ${{env.VERSION}}"
             npm ci
             tsc
+            echo "updating changelog for version ${{env.VERSION}}"
             sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '${{env.VERSION}}'/g' CHANGELOG.md
       - name: Make New Tagged Release Branch and PR
         uses: peter-evans/create-pull-request@v3
