@@ -3,13 +3,13 @@ name: Publish
 on:
   workflow_run:
     workflows: ["Release"]
-    branches: startsWith(github.ref, 'refs/heads/release-')
     types: 
       - completed
 
 jobs:
   publishJob:
     runs-on: ubuntu-latest
+    if: ${{ startsWith(github.ref,'refs/heads/release-') && github.event.workflow_run.conclusion == 'success' }}
     env:
       VERSION: 0
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
