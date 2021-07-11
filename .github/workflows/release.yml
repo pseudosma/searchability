@@ -19,8 +19,10 @@ jobs:
             sed -i 's/# UNRELEASED.*/# UNRELEASED\n\n# '$VERSION'/g' CHANGELOG.md
       - name: Make New Tagged Release Branch and PR
         uses: peter-evans/create-pull-request@v3
+        env:
+          BRANCH_NAME: format('release-{0}', $VERSION)
         with:
-          branch: join(['release-', $VERSION])
+          branch: ${{ BRANCH_NAME }}
           commit-message: 'Update CHANGELOG'
           base: 'master'
       - name: Delete branch
