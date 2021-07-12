@@ -3,8 +3,6 @@ name: Publish
 on:
   workflow_run:
     workflows: ["Release"]
-    branches:
-      - 'release-*'
     types: 
       - completed
 
@@ -16,18 +14,22 @@ jobs:
       VERSION: 0
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
-      - name: Checkout
+      - name: Set Version
         uses: actions/checkout@v2
+        with:
+          ref: 'release-$VERSION'
       - run: |
-            echo ${{ github.ref }}
             VER=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             echo "::set-env name=VERSION::$VER"
+      - name: Switch Branch
+        uses: actions/checkout@v2
+        with:
+          ref: 'release-$VERSION'
       - name: Create Tag
         uses: negz/create-tag@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: $VERSION
-          
       - name: Deploy to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
