@@ -16,15 +16,13 @@ jobs:
     steps:
       - name: Set Version
         uses: actions/checkout@v2
-        with:
-          ref: 'release-$VERSION'
       - run: |
             VER=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             echo "::set-env name=VERSION::$VER"
       - name: Switch Branch
         uses: actions/checkout@v2
         with:
-          ref: 'release-$VERSION'
+          ref: ${{ format('release-{0}', env.VERSION) }}
       - name: Create Tag
         uses: negz/create-tag@v1
         with:
