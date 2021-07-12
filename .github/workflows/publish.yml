@@ -17,6 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - run: |
+            echo ${{ github.ref }}
             VER=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             echo "::set-env name=VERSION::$VER"
             git checkout release-$VER
