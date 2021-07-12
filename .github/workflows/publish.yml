@@ -27,7 +27,7 @@ jobs:
         uses: negz/create-tag@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          version: $VERSION
+          version: ${{env.VERSION}}
       - name: Deploy to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
