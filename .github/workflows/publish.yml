@@ -3,6 +3,8 @@ name: Publish
 on:
   workflow_run:
     workflows: ["Release"]
+    branches:
+      - 'releases-*'
     types: 
       - completed
 
@@ -20,7 +22,6 @@ jobs:
             echo ${{ github.ref }}
             VER=$(cat package.json | grep version | head | awk '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
             echo "::set-env name=VERSION::$VER"
-            git checkout release-$VER
       - name: Create Tag
         uses: negz/create-tag@v1
         with:
