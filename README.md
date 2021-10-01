@@ -4,14 +4,14 @@ Searchability provides a simple type, a **Searchable**, to pair a sting with som
 
 ```typescript
 interface Searchable {
-  string: string;
+  searchTerm: string;
   searchType: SearchType;
 };
 
 enum SearchType {
-  endsWith,
-  includes,
-  startsWith
+  EndsWith,
+  Includes,
+  StartsWith
 }
 ```
 
