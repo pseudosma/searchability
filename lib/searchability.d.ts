@@ -1,10 +1,10 @@
 export declare enum SearchType {
-    endsWith = 0,
-    includes = 1,
-    startsWith = 2
+    EndsWith = 0,
+    Includes = 1,
+    StartsWith = 2
 }
 export interface Searchable {
-    string: string;
+    searchTerm: string;
     searchType: SearchType;
 }
 export declare const Search: (searchable: Searchable, searchString: string, position?: number) => boolean;
