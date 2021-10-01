@@ -1,4 +1,6 @@
 # UNRELEASED
+    * Revised interfaces to adhere more closely to common TS formatting conventions.
+    * Renamed the "string" member of Searchable as "searchTerm"
 
 # 1.0.0
     * Initial version

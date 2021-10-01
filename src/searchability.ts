@@ -1,11 +1,11 @@
 export enum SearchType {
-  endsWith,
-  includes,
-  startsWith
+  EndsWith,
+  Includes,
+  StartsWith
 }
 
 export interface Searchable {
-  string: string;
+  searchTerm: string;
   searchType: SearchType;
 }
 
@@ -17,18 +17,18 @@ export const Search = (
   var retVal: boolean = false;
   if (typeof searchable !== "undefined") {
     switch (searchable.searchType) {
-      case SearchType.endsWith:
-        retVal = searchString.endsWith(searchable.string, position);
+      case SearchType.EndsWith:
+        retVal = searchString.endsWith(searchable.searchTerm, position);
         break;
-      case SearchType.includes:
-        retVal = searchString.includes(searchable.string, position);
+      case SearchType.Includes:
+        retVal = searchString.includes(searchable.searchTerm, position);
         break;
-      case SearchType.startsWith:
-        retVal = searchString.startsWith(searchable.string, position);
+      case SearchType.StartsWith:
+        retVal = searchString.startsWith(searchable.searchTerm, position);
         break;
       default:
         // default to an equality check
-        retVal = searchable.string === searchString;
+        retVal = searchable.searchTerm === searchString;
         break;
     }
   }
