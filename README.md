@@ -1,6 +1,6 @@
 # Searchability [![Test](https://github.com/pseudosma/searchability/actions/workflows/push.yml/badge.svg?branch=master)](https://github.com/pseudosma/searchability/actions/workflows/push.yml) [![Coverage Status](https://coveralls.io/repos/github/pseudosma/searchability/badge.svg?branch=master)](https://coveralls.io/github/pseudosma/searchability?branch=master) ![License](https://img.shields.io/npm/l/searchability)
 
-Searchability provides a simple type, a **Searchable**, to pair a sting with some of the built-in search functions - `endsWith`, `includes`, or `startsWith`. 
+Searchability provides a simple interface, a **Searchable**, to pair a sting with some of the built-in search functions - `endsWith`, `includes`, or `startsWith`. 
 
 ```typescript
 interface Searchable {
@@ -31,7 +31,7 @@ import { Searchable, Search, SearchKey } from "searchability";
 type SearchKey = string | Searchable | RegExp;
 
 const searchString: string = "Lorem ipsum";
-const k: SearchKey = {string: "Lorem", searchKey: SearchKey.startsWith}
+const k: SearchKey = {searchTerm: "Lorem", searchKey: SearchKey.StartsWith}
 ```
 
 ```typescript
