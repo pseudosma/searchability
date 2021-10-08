@@ -1,4 +1,5 @@
 # UNRELEASED
+    * Fixed some errors in the README
 
 # 2.0.0
     * Revised interfaces to adhere more closely to common TS formatting conventions.
