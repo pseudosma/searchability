@@ -1,4 +1,6 @@
 # UNRELEASED
+
+# 2.0.2
     * Fixed some errors in the README
 
 # 2.0.1
